@@ -232,24 +232,28 @@
         this.ants = this.ants.map(ant => {
             ant.health -= 20;
             if (ant.health <= 0) {
-                return null; // Remove dead ants
+                return null; 
             }
             return ant;
         }).filter(Boolean);
 
         return `${startingAnts} ants starting work!`;
     }
-
     feed(antName) {
-        const antIndex = this.ants.findIndex(ant => ant.name === antName);
+  let found = false;
 
-        if (antIndex !== -1) {
-            this.ants[antIndex].health += 15;
-            return "Yum!";
-        } else {
-            return `${antName} not found!`;
-        }
+  this.ants = this.ants.map(ant => {
+    if (ant.name === antName) {
+      ant.health += 15;
+      found = true;
     }
+    return ant;
+  });
+
+  return found ? "Yum!" : `${antName} not found!`;
+}
+    
+    
 }
 
     // 🧪 TESTS, do not make any changes below this line ===================
